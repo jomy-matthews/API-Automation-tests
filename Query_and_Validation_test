@@ -29,7 +29,6 @@ public class Simulate_Query {
 		json.put("app_version","1.1");
 		json.put("country","US");
 		json.put("q","hello"); // Actual Query
-		
 		request.body(json.toJSONString());
 		
 		Response response =request.post("https://sand-api.emogi.com/v1/contents/search");
