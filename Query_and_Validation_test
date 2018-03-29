@@ -13,8 +13,7 @@ public class Simulate_Query {
 	public void querySimulator() 
 	
 	{
-	
-		 RequestSpecification request=RestAssured.given();
+	        RequestSpecification request=RestAssured.given();
 		
 		 //Specify headers
 		 
@@ -69,10 +68,7 @@ public class Simulate_Query {
 		//Specifying body
 		
 		JSONObject json=new JSONObject();
-		//json.put("device_id_type","idfa");
-		//json.put("device_id","BAC9BA51-4C51-45C8-8091-3F6890A21A70");
-		//json.put("app_version","1.1");
-		//json.put("country","US");
+
 		json.put("q","hello");
 		
 		request.body(json.toJSONString());
@@ -87,8 +83,6 @@ public class Simulate_Query {
 		
 		Assert.assertEquals(code, 400);
 					
-		
 	}
 	
-
 }
