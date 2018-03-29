@@ -35,10 +35,10 @@ public class Simulate_Query {
 		Response response =request.post("https://sand-api.emogi.com/v1/contents/search");
 		ResponseBody body = response.getBody();
 		String responselog = RestAssured.given()
-				.log()
-				.all()
-				.post("https://sand-api.emogi.com/v1/contents/search")
-				.asString();
+		.log()
+		.all()
+		.post("https://sand-api.emogi.com/v1/contents/search")
+		.asString();
 		System.out.println(response);
 				
 		System.out.println("Response Body is: " + body.asString());
