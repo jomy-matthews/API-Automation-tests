@@ -52,7 +52,7 @@ public class Simulate_Query {
 		return null;
 	}
 
-
+	//Adding Validation tests
 	@Test
 	public void validateFields() 
 	{
