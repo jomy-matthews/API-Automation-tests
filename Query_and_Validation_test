@@ -18,9 +18,7 @@ public class Simulate_Query {
 		 //Specify headers
 		 
 		request.header("Content-Type","application/json");
-		request.header("Authorization","APIKEY BHEQ70228WUEBYAN50VRYBZRHQKYF9KN");
-		request.header("Emogi-id","95T3TT");
-
+ 
 		//Specify body
 		
 		JSONObject json=new JSONObject();
@@ -31,13 +29,11 @@ public class Simulate_Query {
 		json.put("q","hello"); // Actual Query
 		request.body(json.toJSONString());
 		
-		Response response =request.post("https://sand-api.emogi.com/v1/contents/search");
-		ResponseBody body = response.getBody();
+ 		ResponseBody body = response.getBody();
 		String responselog = RestAssured.given()
 				.log()
 				.all()
-				.post("https://sand-api.emogi.com/v1/contents/search")
-				.asString();
+ 				.asString();
 		System.out.println(response);
 				
 		System.out.println("Response Body is: " + body.asString());
@@ -71,8 +67,7 @@ public class Simulate_Query {
 		
 		request.body(json.toJSONString());
 		
-		Response response=request.post("https://sand-api.emogi.com/v1/contents/search");
-		
+ 		
 		int code=response.getStatusCode();
 		
 		ResponseBody body = response.getBody();
