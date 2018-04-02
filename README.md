@@ -1,37 +1,97 @@
-## Welcome to GitHub Pages
+![REST Assured](rest-assured-logo-green.png)
 
-You can use the [editor on GitHub](https://github.com/jomy-matthews/API-Automation-tests/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+[![Build Status](https://travis-ci.org/rest-assured/rest-assured.svg)](https://travis-ci.org/rest-assured/rest-assured)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.rest-assured/rest-assured/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.rest-assured/rest-assured)
+[![Javadoc](https://javadoc-badge.appspot.com/io.rest-assured/rest-assured.svg)](http://www.javadoc.io/doc/io.rest-assured/rest-assured)
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+Testing and validation of REST services in Java is harder than in dynamic languages 
+such as Ruby and Groovy. REST Assured brings the simplicity of using these 
+languages into the Java domain.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
-```markdown
-Syntax highlighted code block
+## News 
+* 2018-02-09: REST Assured [3.0.7](http://dl.bintray.com/johanhaleby/generic/rest-assured-3.0.7-dist.zip) is released with bug fixes and improvements. See [change log](https://raw.githubusercontent.com/rest-assured/rest-assured/master/changelog.txt) for details.
+* 2017-11-23: REST Assured [3.0.6](http://dl.bintray.com/johanhaleby/generic/rest-assured-3.0.6-dist.zip) is released with support for Java 9.
+* 2017-10-05: REST Assured [3.0.5](http://dl.bintray.com/johanhaleby/generic/rest-assured-3.0.5-dist.zip) is released. It reverts an accidental change to the API that turned out to be binary incompatible. Sorry!
 
-# Header 1
-## Header 2
-### Header 3
+[Older News](https://github.com/rest-assured/rest-assured/wiki/OldNews)
 
-- Bulleted
-- List
 
-1. Numbered
-2. List
+## Examples
+Here's an example of how to make a GET request and validate the JSON or XML response:
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```java
+get("/lotto").then().assertThat().body("lotto.lottoId", equalTo(5));
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Get and verify all winner ids:
 
-### Jekyll Themes
+```java
+get("/lotto").then().assertThat().body("lotto.winners.winnerId", hasItems(23, 54));
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/jomy-matthews/API-Automation-tests/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Using parameters:
 
-### Support or Contact
+```java
+given().
+    param("key1", "value1").
+    param("key2", "value2").
+when().
+    post("/somewhere").
+then().
+    body(containsString("OK"));
+```
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+Using X-Path (XML only):
+
+```java
+given().
+    params("firstName", "John", "lastName", "Doe").
+when().
+    post("/greetMe").
+then().
+    body(hasXPath("/greeting/firstName[text()='John']")).
+```
+
+Need authentication? REST Assured provides several authentication mechanisms:
+
+```java
+given().auth().basic(username, password).when().get("/secured").then().statusCode(200);
+```
+
+Getting and parsing a response body:
+
+```java
+// Example with JsonPath
+String json = get("/lotto").asString()
+List<String> winnderIds = from(json).get("lotto.winners.winnerId");
+    
+// Example with XmlPath
+String xml = post("/shopping").andReturn().body().asString()
+Node category = from(xml).get("shopping.category[0]");
+```
+
+REST Assured supports any HTTP method but has explicit support for *POST*, *GET*, *PUT*, *DELETE*, *OPTIONS*, *PATCH* and *HEAD* and includes specifying and validating e.g. parameters, headers, cookies and body easily.
+
+
+## Documentation
+
+* [Getting started](https://github.com/rest-assured/rest-assured/wiki/GettingStarted)
+* [Downloads](https://github.com/rest-assured/rest-assured/wiki/Downloads)
+* [Usage Guide](https://github.com/rest-assured/rest-assured/wiki/Usage) (click [here](https://github.com/rest-assured/rest-assured/wiki/Usage_Legacy) for legacy documentation)
+* [Javadoc](http://www.javadoc.io/doc/io.rest-assured/rest-assured/3.0.7)
+* [Rest Assured Javadoc](http://static.javadoc.io/io.rest-assured/rest-assured/3.0.7/io/restassured/RestAssured.html)
+* [Rest AssuredMockMvc Javadoc](http://static.javadoc.io/io.rest-assured/spring-mock-mvc/3.0.7/io/restassured/module/mockmvc/RestAssuredMockMvc.html)
+* [XmlPath Javadoc](http://static.javadoc.io/io.rest-assured/xml-path/3.0.7/io/restassured/path/xml/XmlPath.html)
+* [JsonPath Javadoc](http://static.javadoc.io/io.rest-assured/json-path/3.0.7/io/restassured/path/json/JsonPath.html)
+* [Release Notes](https://github.com/rest-assured/rest-assured/wiki/ReleaseNotes)
+* [FAQ](https://github.com/rest-assured/rest-assured/wiki/FAQ)
+
+## Support and discussion
+Join the mailing list at our [Google group](http://groups.google.com/group/rest-assured). 
+
+## Links
+* [Change log](https://github.com/rest-assured/rest-assured/raw/master/changelog.txt)
+* REST Assured on [openhub](https://www.openhub.net/p/rest-assured)
+* [Mailing list](http://groups.google.com/group/rest-assured) for questions and support
