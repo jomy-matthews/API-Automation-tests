@@ -42,7 +42,7 @@ when().
 then().
     body(containsString("OK"));
 ```
-
+ 
 Using X-Path (XML only):
 
 ```java
