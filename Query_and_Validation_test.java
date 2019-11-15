@@ -57,8 +57,8 @@ public class Simulate_Query {
 		 //Specifying headers
 		 
 		request.header("Content-Type","application/json");
-		request.header("Authorization","APIKEY BHEQ70228WUEBYAN50VRYBZRHQKYF9KN");
-		request.header("Emogi-id","95T3TT");
+		request.header("Authorization","APIKEY BHEQty70228WUEBYAN50VRYBZRHQKYF9KN");
+		request.header("project-id","95T443T");
 
 		//Specifying body
 		
