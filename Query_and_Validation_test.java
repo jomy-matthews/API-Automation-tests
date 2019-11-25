@@ -9,7 +9,7 @@ import io.restassured.specification.RequestSpecification;
 
 public class Simulate_Query {
 	
-	
+	  
 	@Test
 	public void querySimulator() 
 	
